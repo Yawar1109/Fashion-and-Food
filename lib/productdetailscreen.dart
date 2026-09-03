@@ -15,7 +15,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("$product.name"),
+        title: Text('${product.name}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,9 +38,15 @@ class ProductDetailScreen extends StatelessWidget {
               Text('\$${product.price.toStringAsFixed(2)}'),
               const SizedBox(height: 24),
 ElevatedButton(
-  onPressed: () {
+ onPressed: () {
   onAddToCart(product);
-  },
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text('${product.name} added to cart'),
+      duration: Duration(seconds: 1),
+    ),
+  );
+},
   child: Text('Add to Cart'),
 ),
           ],

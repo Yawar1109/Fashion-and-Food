@@ -143,8 +143,20 @@ class _ProductListScreenState extends State<ProductListScreen> {
           ),
           const SizedBox(height: 8),
           Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
-          Text('\$${item.price.toStringAsFixed(2)}'),
-          const SizedBox(height: 8),
+        Text('\$${item.price.toStringAsFixed(2)}'),
+const SizedBox(height: 8),
+IconButton(
+  onPressed: () {
+    addToCart(item);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${item.name} added to cart'),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  },
+  icon: Icon(Icons.add_shopping_cart),
+),
         ],
       ),
              ),
@@ -214,10 +226,16 @@ child:  Column(
     const SizedBox(height: 8),
     IconButton(onPressed:(){
      addToCart(item);
+     ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${item.name} add to cart '),
+      duration: Duration(seconds: 1),
+      )
+      );
     }, 
     
      icon:
-    Icon(Icons.add_shopping_cart))
+    Icon(Icons.add_shopping_cart)
+    )
 
                   ],
                 ),
