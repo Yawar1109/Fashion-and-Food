@@ -34,6 +34,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
     });
 
   }
+  String searchQuery = '';
+  final TextEditingController searchController = TextEditingController();
   List<Product> products = [
     Product(name: 'burger', category: 'food', price: 450, imagePath: 'assets/images/burger.jfif'),
     Product(name: 'pizza', category: 'food', price: 900, imagePath: 'assets/images/pizza.jfif'),
@@ -48,13 +50,13 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   List<Product> get foodProducts {
     return products.where((product) {
-      return product.category == 'food';
+      return product.category == 'food' && product.name.toLowerCase().contains(searchQuery.toLowerCase());
     }).toList();
   }
 
   List<Product> get fashionProducts {
     return products.where((product) {
-      return product.category == 'fashion';
+      return product.category == 'fashion'&& product.name.toLowerCase().contains(searchQuery.toLowerCase());
     }).toList();
   }
 
@@ -64,8 +66,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed:  (){
-              Navigator.push(
+            onPressed:  () async{
+             await Navigator.push(
                 context, MaterialPageRoute(
                   builder: (context) => CartScreen(cart: cart)
                   )
@@ -76,12 +78,35 @@ class _ProductListScreenState extends State<ProductListScreen> {
            Text('${cart.length}'),
            SizedBox(width: 16,)
         ],
-        title: Text('food and fashion app'),
+        title: Center(child: Text('Food & Fashion App')),
       ),
       body: ListView(
         children: [
           Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              onChanged: (value){
+                setState(() {
+                  searchQuery = value;
+                });
+              },
+              onSubmitted: (value){
+             
+                 searchController.clear();
+              },
+             decoration: InputDecoration(
+            
+              hintText: 'search product',
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10)
+              )
+             ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(12.0),
+            
             child: Center(
               child: Text(
                 'Food Products',

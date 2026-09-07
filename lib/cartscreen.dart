@@ -75,6 +75,17 @@ class _CartScreenState extends State<CartScreen> {
         },
 
       ),
+    
+    bottomNavigationBar: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        'Total :\$${calculateTotal().toStringAsFixed(2)}', style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+        ),
+        
+        ),
+    ),
     );
   }
 }
