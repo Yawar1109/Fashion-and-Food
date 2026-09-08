@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'cartscreen.dart';
 import 'productdetailscreen.dart';
 void main (){
-  runApp(MaterialApp(
+  runApp(
+    MaterialApp(
 home: ProductListScreen()
 
   )
@@ -17,6 +18,8 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  bool isDarkMode = false;
+
   void addToCart(Product product){
     setState(() {
       bool found = false;
@@ -65,6 +68,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+        
           IconButton(
             onPressed:  () async{
              await Navigator.push(

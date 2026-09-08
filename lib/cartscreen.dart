@@ -26,6 +26,15 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Cart'),
+        actions: [
+            IconButton(onPressed: (){
+            setState(() {
+              widget.cart.clear();
+            });
+       
+          }, icon: Icon(Icons.delete)
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: widget.cart.length,
